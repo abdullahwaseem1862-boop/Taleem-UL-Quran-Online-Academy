@@ -1,0 +1,6 @@
+{
+  "name": "Taleem Ul Quran Campus - Madrasa Management System",
+  "description": "Comprehensive multilingual Madrasa Management System for Taleem Ul Quran Campus with Admissions, Student Management, Attendance, Fees, Examinations, and Hifz Tracker.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

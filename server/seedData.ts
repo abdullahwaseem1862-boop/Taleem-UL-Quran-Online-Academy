@@ -1,0 +1,505 @@
+import { 
+  User, Student, AdmissionApplication, MadrasaClass, Teacher, 
+  AttendanceRecord, TeacherAttendance, FeeVoucher, Exam, ExamResult, 
+  HifzRecord, Announcement 
+} from '../src/types';
+
+export const initialUsers: User[] = [
+  {
+    id: 'usr_admin',
+    username: 'admin',
+    name: 'مولانا عبد الله واسطی (ناظم اعلیٰ)',
+    role: 'admin',
+    email: 'admin@taleemulquran.edu',
+    phone: '0300-1234567',
+    avatar: 'https://images.unsplash.com/photo-1544717305-2782549b5136?w=150&auto=format&fit=crop&q=80'
+  },
+  {
+    id: 'usr_teacher',
+    username: 'teacher',
+    name: 'قاری محمد ابراہیم (استاد شعبہ حفظ)',
+    role: 'teacher',
+    email: 'qari.ibrahim@taleemulquran.edu',
+    phone: '0301-9876543',
+    linkedTeacherId: 'tch_1'
+  },
+  {
+    id: 'usr_accountant',
+    username: 'accountant',
+    name: 'حافظ طارق محمود (ناظم مالیات)',
+    role: 'accountant',
+    email: 'finance@taleemulquran.edu',
+    phone: '0302-5551234'
+  },
+  {
+    id: 'usr_student',
+    username: 'student',
+    name: 'محمد انس بن عبد الرشید',
+    role: 'student',
+    email: 'anas@taleemulquran.edu',
+    phone: '0333-1122334',
+    linkedStudentId: 'std_1'
+  },
+  {
+    id: 'usr_parent',
+    username: 'parent',
+    name: 'عبد الرشید صاحب (والد محمد انس)',
+    role: 'parent',
+    email: 'abdulrasheed@gmail.com',
+    phone: '0333-1122334',
+    linkedStudentId: 'std_1'
+  }
+];
+
+export const initialTeachers: Teacher[] = [
+  {
+    id: 'tch_1',
+    name: 'قاری محمد ابراہیم',
+    designation: 'صدر مدرس شعبہ حفظ',
+    qualification: 'شہادۃ العالمیہ، قاری سبعہ و عشرہ',
+    phone: '0301-9876543',
+    email: 'qari.ibrahim@taleemulquran.edu',
+    hireDate: '2020-03-15',
+    salary: 45000,
+    assignedClasses: ['cls_hifz_1'],
+    specializations: ['تجوید و قراءت', 'حفظ القرآن الکریم']
+  },
+  {
+    id: 'tch_2',
+    name: 'مفتی طارق جمیل عثمانی',
+    designation: 'مدرس درسِ نظامی و حدیث',
+    qualification: 'تخصص فی الافتاء، وفاق المدارس',
+    phone: '0303-4455667',
+    email: 'mufti.tariq@taleemulquran.edu',
+    hireDate: '2021-08-01',
+    salary: 50000,
+    assignedClasses: ['cls_nizami_1'],
+    specializations: ['فقہ و اصول فقہ', 'عربی گرامر']
+  },
+  {
+    id: 'tch_3',
+    name: 'حافظ بلال احمد نقشبندی',
+    designation: 'مدرس ناظرہ و بنیادی دینیات',
+    qualification: 'حفظ القرآن، بی اے اسلامیات',
+    phone: '0305-7788990',
+    email: 'bilal.ahmad@taleemulquran.edu',
+    hireDate: '2022-01-10',
+    salary: 38000,
+    assignedClasses: ['cls_nazra_1'],
+    specializations: ['قاعدہ و ناظرہ', 'مسنون دعائیں و آداب']
+  }
+];
+
+export const initialClasses: MadrasaClass[] = [
+  {
+    id: 'cls_hifz_1',
+    name: 'حلقہ حفظ اول (A)',
+    department: 'Hifz',
+    teacherId: 'tch_1',
+    teacherName: 'قاری محمد ابراہیم',
+    room: 'کمرہ نمبر 101 (ہال اول)',
+    capacity: 25,
+    scheduleTime: 'صبح 7:00 تا شام 4:30'
+  },
+  {
+    id: 'cls_hifz_2',
+    name: 'حلقہ حفظ دوم (B)',
+    department: 'Hifz',
+    teacherId: 'tch_1',
+    teacherName: 'قاری محمد ابراہیم',
+    room: 'کمرہ نمبر 102',
+    capacity: 20,
+    scheduleTime: 'صبح 7:00 تا شام 4:30'
+  },
+  {
+    id: 'cls_nazra_1',
+    name: 'کلاس ناظرہ و تجوید',
+    department: 'Nazra',
+    teacherId: 'tch_3',
+    teacherName: 'حافظ بلال احمد نقشبندی',
+    room: 'کمرہ نمبر 201',
+    capacity: 30,
+    scheduleTime: 'صبح 8:00 تا دوپہر 1:00'
+  },
+  {
+    id: 'cls_nizami_1',
+    name: 'درسِ نظامی (سال اول - اولیٰ)',
+    department: 'Dars-e-Nizami',
+    teacherId: 'tch_2',
+    teacherName: 'مفتی طارق جمیل عثمانی',
+    room: 'کمرہ نمبر 301',
+    capacity: 20,
+    scheduleTime: 'صبح 8:30 تا دوپہر 2:00'
+  }
+];
+
+export const initialStudents: Student[] = [
+  {
+    id: 'std_1',
+    regNo: 'TQ-2024-001',
+    rollNo: 'H-101',
+    name: 'محمد انس',
+    guardianName: 'عبد الرشید',
+    guardianPhone: '0333-1122334',
+    guardianRelation: 'والد',
+    cnic: '35201-1234567-1',
+    dob: '2013-05-12',
+    gender: 'Male',
+    bloodGroup: 'B+',
+    address: 'محلہ مدینہ ٹاؤن، گلی نمبر 3، لاہور',
+    department: 'Hifz',
+    classId: 'cls_hifz_1',
+    admissionDate: '2024-01-10',
+    monthlyFee: 2500,
+    scholarshipDiscount: 500,
+    status: 'Active',
+    notes: 'ذہین طالب علم، ماشاء اللہ یادداشت بہترین ہے'
+  },
+  {
+    id: 'std_2',
+    regNo: 'TQ-2024-002',
+    rollNo: 'H-102',
+    name: 'عبد اللہ زبیر',
+    guardianName: 'زبیر احمد',
+    guardianPhone: '0300-8899112',
+    guardianRelation: 'والد',
+    cnic: '35202-9876543-3',
+    dob: '2014-08-20',
+    gender: 'Male',
+    bloodGroup: 'A+',
+    address: 'گلشن اقبال، بلاک 4، لاہور',
+    department: 'Hifz',
+    classId: 'cls_hifz_1',
+    admissionDate: '2024-01-15',
+    monthlyFee: 2500,
+    scholarshipDiscount: 0,
+    status: 'Active'
+  },
+  {
+    id: 'std_3',
+    regNo: 'TQ-2024-003',
+    rollNo: 'N-201',
+    name: 'حمزہ فاروق',
+    guardianName: 'محمد فاروق',
+    guardianPhone: '0321-4433221',
+    guardianRelation: 'والد',
+    cnic: '35201-5544332-1',
+    dob: '2016-02-14',
+    gender: 'Male',
+    bloodGroup: 'O+',
+    address: 'علامہ اقبال ٹاؤن، رچنا بلاک، لاہور',
+    department: 'Nazra',
+    classId: 'cls_nazra_1',
+    admissionDate: '2024-02-01',
+    monthlyFee: 1800,
+    scholarshipDiscount: 300,
+    status: 'Active'
+  },
+  {
+    id: 'std_4',
+    regNo: 'TQ-2024-004',
+    rollNo: 'DN-301',
+    name: 'زبیر بن طاہر',
+    guardianName: 'طاہر محمود',
+    guardianPhone: '0345-9988776',
+    guardianRelation: 'والد',
+    cnic: '35201-7788990-5',
+    dob: '2008-11-05',
+    gender: 'Male',
+    bloodGroup: 'AB+',
+    address: 'مسلم ٹاؤن، نزد جامع مسجد، لاہور',
+    department: 'Dars-e-Nizami',
+    classId: 'cls_nizami_1',
+    admissionDate: '2024-03-01',
+    monthlyFee: 3000,
+    scholarshipDiscount: 1000,
+    status: 'Active'
+  }
+];
+
+export const initialAdmissions: AdmissionApplication[] = [
+  {
+    id: 'adm_1',
+    applicantName: 'احمد حسن',
+    guardianName: 'حسن رضا',
+    guardianPhone: '0322-1234890',
+    guardianCnic: '35202-6677889-1',
+    dob: '2015-09-10',
+    gender: 'Male',
+    address: 'سبزہ زار اسکیم، مکان 45، لاہور',
+    appliedDepartment: 'Hifz',
+    previousSchoolOrMadrasa: 'دار العلوم اسلامیہ ناظرہ مکمل',
+    status: 'Pending',
+    submissionDate: '2026-10-08',
+    notes: 'انٹرویو اور تجوید ٹیسٹ کے لیے طلب کیا گیا ہے'
+  },
+  {
+    id: 'adm_2',
+    applicantName: 'محمد عثمان',
+    guardianName: 'محمد اکرم',
+    guardianPhone: '0312-9988112',
+    guardianCnic: '35201-3322114-7',
+    dob: '2014-04-18',
+    gender: 'Male',
+    address: 'واپڈا ٹاؤن، فیز 1، لاہور',
+    appliedDepartment: 'Nazra',
+    previousSchoolOrMadrasa: 'الصفہ اکیڈمی',
+    status: 'Approved',
+    submissionDate: '2026-10-05',
+    assignedClassId: 'cls_nazra_1',
+    assignedRollNo: 'N-202'
+  }
+];
+
+export const initialAttendance: AttendanceRecord[] = [
+  { id: 'att_1', date: '2026-10-10', studentId: 'std_1', classId: 'cls_hifz_1', status: 'Present' },
+  { id: 'att_2', date: '2026-10-10', studentId: 'std_2', classId: 'cls_hifz_1', status: 'Present' },
+  { id: 'att_3', date: '2026-10-10', studentId: 'std_3', classId: 'cls_nazra_1', status: 'Late', remarks: '15 منٹ تاخیر' },
+  { id: 'att_4', date: '2026-10-10', studentId: 'std_4', classId: 'cls_nizami_1', status: 'Present' },
+  { id: 'att_5', date: '2026-10-11', studentId: 'std_1', classId: 'cls_hifz_1', status: 'Present' },
+  { id: 'att_6', date: '2026-10-11', studentId: 'std_2', classId: 'cls_hifz_1', status: 'Present' },
+  { id: 'att_7', date: '2026-10-11', studentId: 'std_3', classId: 'cls_nazra_1', status: 'Present' },
+  { id: 'att_8', date: '2026-10-11', studentId: 'std_4', classId: 'cls_nizami_1', status: 'Leave', remarks: 'طبی رخصت' }
+];
+
+export const initialTeacherAttendance: TeacherAttendance[] = [
+  { id: 't_att_1', date: '2026-10-11', teacherId: 'tch_1', status: 'Present', timeIn: '06:55 AM' },
+  { id: 't_att_2', date: '2026-10-11', teacherId: 'tch_2', status: 'Present', timeIn: '08:15 AM' },
+  { id: 't_att_3', date: '2026-10-11', teacherId: 'tch_3', status: 'Present', timeIn: '07:50 AM' }
+];
+
+export const initialFeeVouchers: FeeVoucher[] = [
+  {
+    id: 'f_vch_1',
+    voucherNumber: 'VCH-2026-1001',
+    studentId: 'std_1',
+    studentName: 'محمد انس',
+    rollNo: 'H-101',
+    className: 'حلقہ حفظ اول (A)',
+    month: 'اکتوبر 2026',
+    dueDate: '2026-10-15',
+    tuitionFee: 2500,
+    admissionFee: 0,
+    examFee: 0,
+    hostelFee: 0,
+    scholarshipDiscount: 500,
+    totalPayable: 2000,
+    paidAmount: 2000,
+    balance: 0,
+    status: 'Paid',
+    paymentDate: '2026-10-05',
+    paymentMethod: 'Cash',
+    receiptNumber: 'REC-8901',
+    receiverName: 'حافظ طارق محمود'
+  },
+  {
+    id: 'f_vch_2',
+    voucherNumber: 'VCH-2026-1002',
+    studentId: 'std_2',
+    studentName: 'عبد اللہ زبیر',
+    rollNo: 'H-102',
+    className: 'حلقہ حفظ اول (A)',
+    month: 'اکتوبر 2026',
+    dueDate: '2026-10-15',
+    tuitionFee: 2500,
+    admissionFee: 0,
+    examFee: 0,
+    hostelFee: 0,
+    scholarshipDiscount: 0,
+    totalPayable: 2500,
+    paidAmount: 0,
+    balance: 2500,
+    status: 'Unpaid'
+  },
+  {
+    id: 'f_vch_3',
+    voucherNumber: 'VCH-2026-1003',
+    studentId: 'std_3',
+    studentName: 'حمزہ فاروق',
+    rollNo: 'N-201',
+    className: 'کلاس ناظرہ و تجوید',
+    month: 'اکتوبر 2026',
+    dueDate: '2026-10-15',
+    tuitionFee: 1800,
+    admissionFee: 0,
+    examFee: 300,
+    hostelFee: 0,
+    scholarshipDiscount: 300,
+    totalPayable: 1800,
+    paidAmount: 1800,
+    balance: 0,
+    status: 'Paid',
+    paymentDate: '2026-10-07',
+    paymentMethod: 'Bank',
+    receiptNumber: 'REC-8902',
+    receiverName: 'حافظ طارق محمود'
+  },
+  {
+    id: 'f_vch_4',
+    voucherNumber: 'VCH-2026-1004',
+    studentId: 'std_4',
+    studentName: 'زبیر بن طاہر',
+    rollNo: 'DN-301',
+    className: 'درسِ نظامی (سال اول)',
+    month: 'اکتوبر 2026',
+    dueDate: '2026-10-15',
+    tuitionFee: 3000,
+    admissionFee: 0,
+    examFee: 500,
+    hostelFee: 2000,
+    scholarshipDiscount: 1000,
+    totalPayable: 4500,
+    paidAmount: 2000,
+    balance: 2500,
+    status: 'Partial',
+    paymentDate: '2026-10-06',
+    paymentMethod: 'EasyPaisa/JazzCash',
+    receiptNumber: 'REC-8903',
+    receiverName: 'حافظ طارق محمود'
+  }
+];
+
+export const initialExams: Exam[] = [
+  {
+    id: 'ex_1',
+    title: 'امتحان ششماہی 1448ھ / 2026ء',
+    term: 'Mid Term',
+    year: '2026',
+    startDate: '2026-11-10',
+    endDate: '2026-11-20',
+    classes: ['cls_hifz_1', 'cls_nazra_1', 'cls_nizami_1']
+  }
+];
+
+export const initialExamResults: ExamResult[] = [
+  {
+    id: 'res_1',
+    examId: 'ex_1',
+    examTitle: 'امتحان ششماہی 1448ھ / 2026ء',
+    studentId: 'std_1',
+    studentName: 'محمد انس',
+    rollNo: 'H-101',
+    classId: 'cls_hifz_1',
+    className: 'حلقہ حفظ اول (A)',
+    subjects: [
+      { subjectName: 'حفظ قرآن (تسمیع)', totalMarks: 100, obtainedMarks: 98 },
+      { subjectName: 'تجوید و مخارج', totalMarks: 50, obtainedMarks: 49 },
+      { subjectName: 'دینیات و مسنون دعائیں', totalMarks: 50, obtainedMarks: 47 }
+    ],
+    totalMarks: 200,
+    obtainedMarks: 194,
+    percentage: 97.0,
+    grade: 'Mumtaz (A+)',
+    position: 'پہلی پوزیشن (1st)',
+    teacherRemarks: 'ماشاء اللہ شاندار کارکردگی، اللہ تعالیٰ علم و عمل میں برکت عطا فرمائے'
+  },
+  {
+    id: 'res_2',
+    examId: 'ex_1',
+    examTitle: 'امتحان ششماہی 1448ھ / 2026ء',
+    studentId: 'std_2',
+    studentName: 'عبد اللہ زبیر',
+    rollNo: 'H-102',
+    classId: 'cls_hifz_1',
+    className: 'حلقہ حفظ اول (A)',
+    subjects: [
+      { subjectName: 'حفظ قرآن (تسمیع)', totalMarks: 100, obtainedMarks: 88 },
+      { subjectName: 'تجوید و مخارج', totalMarks: 50, obtainedMarks: 43 },
+      { subjectName: 'دینیات و مسنون دعائیں', totalMarks: 50, obtainedMarks: 44 }
+    ],
+    totalMarks: 200,
+    obtainedMarks: 175,
+    percentage: 87.5,
+    grade: 'Jayyid Jiddan (A)',
+    position: 'دوسری پوزیشن (2nd)',
+    teacherRemarks: 'بہت اچھی کوشش، سبق کی دہرائی پر مزید توجہ درکار ہے'
+  }
+];
+
+export const initialHifzRecords: HifzRecord[] = [
+  {
+    id: 'hifz_rec_1',
+    studentId: 'std_1',
+    studentName: 'محمد انس',
+    rollNo: 'H-101',
+    date: '2026-10-11',
+    teacherId: 'tch_1',
+    teacherName: 'قاری محمد ابراہیم',
+    sabaq: {
+      surah: 'سورۃ النحل',
+      ayaFrom: 41,
+      ayaTo: 60,
+      juzNumber: 14,
+      rating: 'Mumtaz'
+    },
+    sabqi: {
+      juzNumber: 14,
+      pagesOrQuarter: 'نصف اول (پہلے 8 صفحات)',
+      rating: 'Mumtaz'
+    },
+    manzil: {
+      juzNumber: 5,
+      quarterOrHalf: 'مکمل پارہ نمبر 5',
+      rating: 'Jayyid Jiddan'
+    },
+    totalJuzMemorized: 14,
+    currentJuz: 14,
+    remarks: 'ماشاء اللہ آواز و لحن اور مخارج دونوں نہایت عمدہ ہیں'
+  },
+  {
+    id: 'hifz_rec_2',
+    studentId: 'std_2',
+    studentName: 'عبد اللہ زبیر',
+    rollNo: 'H-102',
+    date: '2026-10-11',
+    teacherId: 'tch_1',
+    teacherName: 'قاری محمد ابراہیم',
+    sabaq: {
+      surah: 'سورۃ یوسف',
+      ayaFrom: 1,
+      ayaTo: 25,
+      juzNumber: 12,
+      rating: 'Jayyid'
+    },
+    sabqi: {
+      juzNumber: 11,
+      pagesOrQuarter: 'ربع اخير',
+      rating: 'Jayyid'
+    },
+    manzil: {
+      juzNumber: 3,
+      quarterOrHalf: 'نصف پارہ',
+      rating: 'Maqbool'
+    },
+    totalJuzMemorized: 11,
+    currentJuz: 12,
+    remarks: 'منزل میں غلطیاں کم کریں، دہرائی کا وقت بڑھائیں'
+  }
+];
+
+export const initialAnnouncements: Announcement[] = [
+  {
+    id: 'anc_1',
+    titleUrdu: 'امتحان ششماہی کی تاریخوں کا باقاعدہ اعلان',
+    titleEn: 'Official Announcement of Mid-Term Examinations',
+    titleAr: 'الإعلان الرسمي عن مواعيد اختبارات نصف العام',
+    contentUrdu: 'تمام طلبہ کرام اور والدین کو مطلع کیا جاتا ہے کہ ششماہی امتحانات 10 نومبر 2026 سے شروع ہوں گے۔ تفصیلی ڈیٹ شیٹ شعبہ جات میں آویزاں کر دی گئی ہے۔',
+    contentEn: 'All students and respected parents are hereby notified that the Mid-Term examinations will commence from November 10, 2026. The detailed date sheet is displayed on campus notice boards.',
+    contentAr: 'نحيطكم علماً بأن امتحانات نصف العام الدراسي ستبدأ بمشيئة الله تعالى في العاشر من نوفمبر ٢٠٢٦م.',
+    date: '2026-10-09',
+    category: 'Exam',
+    targetRoles: ['student', 'parent', 'teacher']
+  },
+  {
+    id: 'anc_2',
+    titleUrdu: 'فیس واؤچرز کی بر وقت ادائیگی کی یاد دہانی',
+    titleEn: 'Monthly Fee Vouchers Payment Reminder',
+    titleAr: 'تذكير بسداد الرسوم الشهرية',
+    contentUrdu: 'ماہ اکتوبر کے فیس چالان جاری کیے جا چکے ہیں۔ آخری تاریخ 15 اکتوبر ہے۔ ازراہ کرم بر وقت ادائیگی یقینی بنائیں۔',
+    contentEn: 'Fee vouchers for October 2026 have been issued. The due date is October 15. Respected parents are requested to pay promptly.',
+    contentAr: 'تم إصدار إشعارات سداد الرسوم لشهر أكتوبر، ويرجى السداد قبل الموعد النهائي المحدد.',
+    date: '2026-10-05',
+    category: 'General',
+    targetRoles: ['parent', 'student']
+  }
+];

@@ -1,0 +1,56 @@
+@import "tailwindcss";
+
+@layer base {
+  body {
+    font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+  }
+  
+  [dir="rtl"] {
+    font-family: 'Noto Nastaliq Urdu', 'Amiri', 'Plus Jakarta Sans', system-ui, sans-serif;
+  }
+}
+
+.font-quran {
+  font-family: 'Amiri', serif;
+}
+
+.font-nastaliq {
+  font-family: 'Noto Nastaliq Urdu', 'Amiri', serif;
+}
+
+/* Islamic Geometric Subtle Motif */
+.bg-islamic-pattern {
+  background-color: #064e3b;
+  background-image: radial-gradient(#047857 0.75px, transparent 0.75px), radial-gradient(#047857 0.75px, #064e3b 0.75px);
+  background-size: 30px 30px;
+  background-position: 0 0, 15px 15px;
+}
+
+.bg-islamic-cream {
+  background-color: #faf8f5;
+  background-image: radial-gradient(#e5dec9 0.6px, transparent 0.6px);
+  background-size: 24px 24px;
+}
+
+/* Print Specific Rules for Fee Receipts and Report Cards */
+@media print {
+  body {
+    background: white !important;
+    color: black !important;
+    font-size: 12pt;
+  }
+
+  .no-print {
+    display: none !important;
+  }
+
+  .print-only {
+    display: block !important;
+  }
+
+  .print-card {
+    box-shadow: none !important;
+    border: 1px solid #10b981 !important;
+    page-break-inside: avoid;
+  }
+}
